@@ -1,0 +1,24 @@
+[workspace]
+channels = ["conda-forge", "pytorch"]
+name = "qtgraph"
+platforms = ["osx-arm64"]
+version = "0.1.0"
+
+[tasks]
+
+[dependencies]
+pytorch = ">=2.10.0,<3"
+polars = ">=1.40.0,<2"
+
+[pypi-dependencies]
+torch-geometric = ">=2.7.0, <3"
+qtgraph = { path = ".", editable = true }
+
+[feature.dev.dependencies]
+pytest = ">=8"
+
+[feature.dev.pypi-dependencies]
+pytest-benchmark = ">=5"
+
+[environments]
+dev = ["dev"]
