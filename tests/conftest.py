@@ -153,6 +153,24 @@ def overlap_eliminates_core() -> dict:
 
 
 @pytest.fixture
+def single_partition() -> dict:
+    """4-node chain; all nodes in one partition — no inter-chunk edges.
+
+    Graph: 0 → 1 → 2 → 3 (directed), labels [0, 0, 0, 0], k=1.
+
+    Expected chunks:
+        core 0: {0, 1, 2, 3}
+        no overlap chunks
+        no inter-chunk edges
+    """
+    data = Data(
+        x=torch.arange(4).float().unsqueeze(1),
+        edge_index=torch.tensor([[0, 1, 2], [1, 2, 3]]),
+    )
+    return {"data": data, "labels": torch.tensor([0, 0, 0, 0]), "k": 1}
+
+
+@pytest.fixture
 def no_node_features() -> dict:
     """Minimal overlap graph without any node features.
 
